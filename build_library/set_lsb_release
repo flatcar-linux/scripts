@@ -26,7 +26,11 @@ ROOT_FS_DIR="$FLAGS_root"
 [ -d "$ROOT_FS_DIR" ] || die "Root FS does not exist? ($ROOT_FS_DIR)"
 
 OS_NAME="Flatcar Container Linux by Kinvolk"
-OS_CODENAME="Oklo"
+if [ -n "${FLATCAR_VERSION_CODENAME}" ] ; then
+  OS_CODENAME="${FLATCAR_VERSION_CODENAME}"
+else
+  OS_CODENAME="Oklo"
+fi
 OS_ID="flatcar"
 OS_ID_LIKE="coreos"
 OS_PRETTY_NAME="$OS_NAME $FLATCAR_VERSION (${OS_CODENAME})"
