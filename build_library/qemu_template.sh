@@ -176,7 +176,7 @@ fi
 # ${CONFIG_DRIVE} or ${CONFIG_IMAGE} will be mounted in Flatcar as /media/configdrive
 if [ -n "${CONFIG_DRIVE}" ]; then
     set -- \
-        -fsdev local,id=conf,security_model=none,readonly,path="${CONFIG_DRIVE}" \
+        -fsdev local,id=conf,security_model=none,readonly=on,path="${CONFIG_DRIVE}" \
         -device virtio-9p-pci,fsdev=conf,mount_tag=config-2 "$@"
 fi
 
@@ -215,7 +215,7 @@ fi
 
 if [ -n "${VM_PFLASH_RO}" ] && [ -n "${VM_PFLASH_RW}" ]; then
     set -- \
-        -drive if=pflash,file="${SCRIPT_DIR}/${VM_PFLASH_RO}",format=raw,readonly \
+        -drive if=pflash,file="${SCRIPT_DIR}/${VM_PFLASH_RO}",format=raw,readonly=on \
         -drive if=pflash,file="${SCRIPT_DIR}/${VM_PFLASH_RW}",format=raw "$@"
 fi
 
